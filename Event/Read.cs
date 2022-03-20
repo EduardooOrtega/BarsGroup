@@ -13,9 +13,10 @@ namespace Event
         public void Run()
         {
             char input = ' ';
-            while (input != 'c' || input != 'с')
+            while (input != 'c' && input != 'с')
             {
                 input = Console.ReadKey().KeyChar;
+
                 OnKeyPressed?.Invoke(this, input);
             }
         }
