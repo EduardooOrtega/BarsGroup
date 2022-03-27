@@ -16,4 +16,12 @@ Entity e5 = new Entity { Id = 5, ParentId = 4, Name = "Child of 4 entity"};
 
 List<Entity> entities = new List<Entity> { e1, e2, e3, e4, e5 };
 
-Entity.Sort(entities);
+//check
+foreach (var item in Entity.Sort(entities))
+{
+    foreach (var entity in item.Value)
+    {
+        Console.WriteLine($"{item.Key} {entity.Id}"); 
+    }
+    Console.WriteLine();
+} 

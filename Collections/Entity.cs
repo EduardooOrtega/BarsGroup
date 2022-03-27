@@ -33,17 +33,22 @@ namespace Collections
         {
             Dictionary<int, List<Entity>> dictionary = new Dictionary<int, List<Entity>>();
 
-            var query = ListEntity.OrderBy(Id => Id).Select(item => item);
-
+            
             int previousParentId = 0;
+            List<Entity> list = new List<Entity>();
+            var query = ListEntity.OrderBy(Id => Id).Select(item => item);
             foreach (var item in query)
             {
-                //if (item.ParentId != previousParentId)
-                //{
-                //    dictionary.Add(item.ParentId, new List<Entity>);
-                //}
-                Console.WriteLine($"{ item.ParentId}{ item.Id}");
+                if (item.ParentId != previousParentId)
+                {
+                    dictionary.Add(previousParentId, list);
+                    list = new List<Entity>();
+                    previousParentId = item.ParentId;
+                }
+                
+                list.Add(item);
             }
+            dictionary.Add(list[0].ParentId, list);//add last list
 
             return dictionary;
         }
