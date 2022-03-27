@@ -8,7 +8,7 @@ namespace Logger
 {
     internal class LocalFileLogger<T> : ILogger
     {
-        private string Path;
+        private readonly string Path;
 
         public string GenericTypeName = typeof(T).Name;
 
@@ -19,17 +19,17 @@ namespace Logger
 
         public void LogInfo(string message)
         {
-            File.WriteAllText(Path, $"[Info]: [{GenericTypeName}] : {message}");
+            File.AppendAllText(Path, $"[Info]: [{GenericTypeName}] : {message}" + Environment.NewLine);
         }
 
         public void LogWarning(string message)
         {
-            File.WriteAllText(Path, $"[Warning] : [{GenericTypeName}] : {message}");
+            File.AppendAllText(Path, $"[Warning] : [{GenericTypeName}] : {message}" + Environment.NewLine);
         }
 
         public void LogError(string message, Exception ex)
         {
-            File.WriteAllText(Path, $"[Error] : [{GenericTypeName}] : {message}. {ex.Message}");
+            File.AppendAllText(Path, $"[Error] : [{GenericTypeName}] : {message}. {ex.Message}" + Environment.NewLine);
         }
     }
 
