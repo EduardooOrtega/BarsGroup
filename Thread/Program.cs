@@ -86,8 +86,7 @@ public class Program
                     command = Console.ReadLine();
                 }
             }
-            Thread t = new Thread(call => QueryCall(message, arguments.ToArray()));
-            t.Start();
+            ThreadPool.QueueUserWorkItem(callBack => QueryCall(message, arguments.ToArray()));
 
             arguments = new List<string>();//создаём новы лист аргуметов для каждого запроса
         }
